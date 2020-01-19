@@ -1,0 +1,47 @@
+<html lang="end" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="header/header :: header" >
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<div th:replace="header/header :: navbar" /></div>
+			<div class="login_sec"><div class="container">
+				<ol class="breadcrumb">
+					<li><a href="/">Accueil</a></li>
+					<li class="active">Se connecter</li>
+				</ol>
+				<div class="col-md-6 login-right">
+					<h3>Retour utilisateur</h3>
+					<p>Si vous avez déjà un compte, cliquez sur le bouton de connexion</p> 
+					<a class="acount-btn" href="/login">Connexion</a>
+				</div>
+				<div class="col-md-6 log">
+					<h2>Enregistrez vous ici </h2>
+					<p>Bienvenue sur notre plateforme, remplissez les champs suivants pour votre inscription</p>
+					<p>Après votre inscription, un email vous sera envoyé pour la validation de votre compte</p>
+					<div th:if="${emailSent}"><p style="color: green">
+						<p>Un email vous a été envoyé sur votre compte !</p>
+					</div>
+					<form th:action="@{/newUser}" method="post"> 
+						<label>Nom d'utilisateur</label>
+						<span style="color: red; font-size: small" th:if="${usernameExists}">
+						  Ce nom d'utilisateur existe déjà, veuillez un choisir un autre !
+						</span> 
+						<input type="text" value="" placeholder="username" id="username" name="username"> 
+						<label>Adresse email</label>
+						<span style="color: red; font-size: small" th:if="${emailExists}">
+						  Cet adresse email existe déjà, veuillez choisir un autre !
+						</span> <input type="text" value="" placeholder="Email address" id="email" name="email"> 
+						<input type="submit" value="Register"> 
+						<span>
+							Avez-vous déjà un compte ? 
+							<a href="/login" >Se connecter</a>
+						</span>
+					</form>
+				</div>
+				<div class="clearfix">
+				</div>
+			</div>
+		</div>
+		<div th:replace="footer/footer :: footer" /></div>
+	</body>
+</html>

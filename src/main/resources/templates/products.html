@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="end" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header/header :: header">
+	<meta charset="utf-8">
+	
+</head>
+<body>
+
+<!--cart-->
+<div th:replace="header/header :: navbar"/></div>
+
+<!--header//-->
+<div class="product-model">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/">Accueil</a></li>
+            <li class="active">Tous les produits</li>
+        </ol>
+        <div th:if="${emailsend}">
+            <div class="alert alert-success" role="alert">
+                Un email vous a été envoyé, vérifiez s'il vous plaît !
+            </div>
+        </div>
+        
+        <h2>NOS PRODUITS</h2>
+        <div th:if="${emptyList}" class="alert alert-primary" role="alert">
+            Aucun produit de ce genre n'existe ici ! Révisitez le site svp !
+        </div>
+        <div class="col-md-12 product-model-sec">
+            <div class="product-grid love-grid" data-th-each="product : ${productList}" >
+                <div th:if="${product.active}"> 
+                    <div class="more-product" >
+                    	<span> </span>
+                    </div>
+                    <input th:value="${product.id}" class="idProd" name="idProd" hidden=""/>
+                    <div class="product-img b-link-stripe b-animate-go  thickbox">
+                    	<a th:href="@{/buy?id=1&id=}+${product.id}">
+	                        
+	                        <img style="height: 230px; width: 250px"
+	                             th:src="@{${'/images/' + product.product_image }}" class="img-responsive"
+	                             alt="Image produit"/>
+                            
+                         </a>
+                    </div>
+                	
+	                <div class="product-info simpleCart_shelfItem">
+	                    <div class="product-info-cust">
+	                        <h4 th:text="${product.title}"></h4>
+	                        <span><span class="item_price" th:text="${product.price}"> </span> XOF</span><br/>
+	                        <a
+	                        	th:href="@{/addItem?id=1&id=}+${product.id}"
+	                            class="item_add items pdt btn btn-primary"
+	                           
+	                            >
+	                            Ajouter au panier</a>
+	                      
+	                    </div>
+	                    <div class="clearfix"></div>
+	                </div>
+	             </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="footer/footer :: footer"/></div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

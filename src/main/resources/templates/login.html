@@ -1,0 +1,108 @@
+<html lang="end" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="header/header :: header">
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<div th:replace="header/header :: navbar"/></div>
+		
+		<div class="login_sec" style="font-size:19px;">
+			<div class="container ">
+				<ol class="breadcrumb">
+					<li><a href="/">Accueil</a></li>
+					<li class="active">Inscription & Connexion & Récupérer mot de passe</li>
+				</ol>
+				
+				<div id="content">
+					<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+						<li th:classappend="${classActiveRegister} ? 'active'">
+							<a href="#tab1" data-toggle="tab">Nouveau compte</a>
+						</li>
+						<li th:classappend="${classActiveLogin} ? 'active'">
+							<a href="#tab2" data-toggle="tab">Connexion </a>
+						</li>
+						<li th:classappend="${classActiveForgot} ? 'active'">
+							<a href="#tab3" data-toggle="tab">Mot de passe</a>
+						</li>
+					</ul>
+					<div id="my-tab-content" class="tab-content">
+						<div class="tab-pane" id="tab1" th:classappend="${classActiveRegister} ? 'in active'">
+							<div class="row header" style="margin-top: 20px">
+								<div class="col-md-9 log">
+									<h2>Créer un compte ici</h2>
+									<p>Bienvenue, remplissez les différents champs</p>
+									<p>Après votre inscription, vous allez récevoir un email de confirmation !</p>
+									
+									<div th:if="${emailSent}">
+										<p style="color: green">Un email vous a été envoyé sur votre compte</p>
+									</div>
+									
+									<form th:action="@{/newUser}" method="post"> 
+										
+										<input type="text" value="" placeholder="Nom" id="firstname" name="firstname">
+										<input type="text" value="" placeholder="Prénom(s)" id="lastname" name="lastname">
+										
+										<span style="color: red; font-size: small" th:if="${usernameExists}">
+										 	Ce nom d'utilisateur existe déjà, veuillez un choisir un autre !
+										</span> 
+										<input type="text" value="" placeholder="Nom d'utilisateur" id="username" name="username" required><br> 
+										
+										<span style="color: red; font-size: small" th:if="${emailExists}">
+										 Cet adresse email existe déjà, veuillez choisir un autre !
+										</span> 
+										<input type="text" value="" placeholder="Adresse email " id="email" name="email" required>
+										
+										<input type="text" value="" placeholder="Téléphone" id="phone" name="phone">
+										
+										<input type="password" value="" placeholder="Mot de passe" id="password" name="password">
+										
+										<input type="submit" value="S'inscrire"> 
+										
+										<span>Avez-vous déjà un compte ? <a href="">Connecter vous !</a></span>
+									</form>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane" id="tab2" th:classappend="${classActiveLogin} ? 'in active'">
+							<div class="row header" style="margin-top: 20px">
+								<div class="col-md-9 log">
+									<p>Bienvenue, remplissez les différents champs !</p>
+									<p>Si vous vous êtes déjà connecté avec nous, <span>cliquez ici !</span></p>
+									<form th:action="@{/login}" method="post"> 
+									
+										<input type="text" name="username" id="username" placeholder="Nom d'utilisateur" required><br> 
+										
+										<input type="password" name="password" id="password" placeholder="Mot de passe" required> 
+										
+										<input type="submit" value="Se connecter"> 
+										
+										<span th:if="${param.error != null}" style="color: red; font-size: small">
+											Mot de passe ou nom d'utilsateur incorrecte
+										</span><br><br>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="tab3" th:classappend="${classActiveForgot} ? 'in active'">
+							<div class="row header" style="margin-top: 20px">
+								<div class="col-md-9 log">
+									<p>Bienvenue, remplissez les différents champs !</p>
+									<!-- <p>Si vous avez déjà un compte avec nous, <span>cliquez ici !</span></p> -->
+									<div th:if="${emailNotExist}" class="alert alert-danger">
+										Cet email n'existe pas !
+									</div>
+									<form th:action="@{/forgetPassword}" method="post"> 
+										
+										<input type="text" value="" placeholder="Adresse email" id="forgot_email" name="forgot_email"> 
+										<input type="submit" value="Réinitialisé mot de passe">
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:replace="footer/footer :: footer"/></div>
+	</body>
+</html>

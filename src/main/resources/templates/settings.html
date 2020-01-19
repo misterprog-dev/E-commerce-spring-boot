@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="end" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="header/header :: header">
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<div th:replace="header/header :: navbar"></div>
+		<div class="contact">
+			<div class="container">
+				<ol class="breadcrumb">
+					<li><a href="#">Accueil</a></li>
+					<li class="active">Configuration compte</li>
+				</ol>
+				<div class="contact-head">
+					<h2>PAGE DE CONFIGURATION</h2>
+					
+					<form th:action="${updateUserInfo}" method="post">
+						<div class="col-md-6 contact-left"> 
+							<label>Nom </label> <input type="text" id="firstname" name="firstname" th:value="${user.firstname}"/> 
+							<label>Prénom </label><input type="text" id="lastname" name="lastname" th:value="${user.lastname}"/> 
+							<label>Nom d'utilisateur </label>
+							<span style="color: red; font-size: small" th:if="${usernameExists}">
+								Ce nom d'utilisateur existe déjà
+							</span> 
+							<input type="text" id="username" name="username" th:value="${user.username}"/>
+							<label>
+								Mot de passe actuel 
+								<span style="color: red; font-size: small">
+								,vérifier votre e-mail à partir du mot de passe actuel
+								</span>
+							</label> 
+							<input type="text" id="currentPassword" name="currentPassword" />
+							<p>Saisissez votre mot de passe actuel pour modifier l'e-mail</p>
+						</div>
+						<div class="col-md-6 contact-right"> 
+							<label>* Email</label>
+							<span style="color: red; font-size: small" th:if="${emailExists}">
+								L'email existe déjà, veuillez choisir un autre email
+							</span> 
+							<input type="text" id="email" name="email" th:value="${user.email}"/> 
+							<label>Nouveau mot de passe</label> 
+							<input type="text" id="newPassword" name="newPassword" /> 
+							<label>Confirmer mot de passe</label> 
+							<input type="text" id="confirmPassword" /> 
+							<label style="color: white">....</label> 
+							<input type="submit" value="Update Account">
+						</div>
+						<div class="clearfix"></div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div th:replace="footer/footer :: footer"></div>
+	</body>
+</html>

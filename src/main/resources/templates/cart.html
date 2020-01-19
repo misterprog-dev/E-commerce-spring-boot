@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html lang="end" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header/header :: header">
+	<meta charset="utf-8">
+	
+</head>
+<body>
+<!-- header -->
+<div th:replace="header/header :: navbar"></div>
+
+<!--header//-->
+<div class="product-model">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/">Accueil</a></li>
+            <li class="active">Mes produits choisis</li>
+        </ol>
+
+        <h2>VOTRE PANIER</h2>
+        
+        <div th:if="${emptyList}"  class="alert alert-primary" role="alert">
+        	<div class="col-md-2"></div>
+			<div class="col-md-8">
+            	<p>
+            		<b style="font-size: 22px;text-align: center;">Votre panier est vide ! </b>
+            	</p>
+            </div>
+        </div>
+		
+		
+		<div th:if="${NotemptyList}" class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Paiment du panier</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-2 col-xs-2"><b>Action</b></div>
+							<div class="col-md-2 col-xs-2"><b>Image produit</b></div>
+							<div class="col-md-2 col-xs-2"><b>Nom produit</b></div>
+							<div class="col-md-2 col-xs-2"><b>Quantité</b></div>
+							<div class="col-md-2 col-xs-2"><b>Prix (XOF)</b></div>
+						</div>
+						<div id="cart_checkout">
+							<form method="post" action="">
+								<div class="row"  data-th-each="product : ${productList}">
+									
+									<div class="col-md-2">
+										<div class="btn-group">
+											<a th:href="@{/deleteitem?id=}+${product.id}" 
+											   class="btn btn-danger remove">
+											   
+											   <span class="glyphicon glyphicon-trash"></span></a>
+											<a href="#" class="btn btn-primary update"><span class="glyphicon glyphicon-ok-sign"></span></a>
+										</div>
+									</div>
+									
+									<div class="col-md-2">
+										<img
+				                             th:src="@{${'/images/' + product.productimage }}" class="img-responsive"
+				                             alt="Image produit"/>
+									</div>
+									<div class="col-md-2"><span th:text="${product.productname}"></span></div>
+									<div class="col-md-2"><input type="text" class="form-control qty" th:value="${product.quantite}"></div>
+									<div class="col-md-2"><input type="text" class="form-control price" 
+									th:value="${product.productprice}" readonly="readonly">
+									
+									<input type="hidden" th:value="${product.productnum}"  name="product_id[]">
+									<input type="hidden" th:value="${product.productnum}"  name="">
+									
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="col-md-8"></div>
+									<div class="col-md-4">
+										<b class="net_total" style="font-size:20px;">Total : <span th:text="${total}"></span> FCFA</b>
+									</div>
+								</div>
+								
+							</form>
+							<div class="row">
+								 <div class="col-md-6"></div>
+								 <div class="col-md-6">
+								 
+									<script src="https://www.paypal.com/sdk/js?client-id=AeUpj6_AeET6ihgpm-oE488nlZ9ds9Fy35d1-WuLXu1D8rE7Jfuj7fSQpnlpY_y_fwF1miXsLNKE0rqQ"></script>
+									 
+									 <div id="paypal-button-container"></div>
+									 
+									 <script>
+									 	var total = parseFloat([[${total}]]);
+									 	var idList = [[${idList}]];
+									 	console.log(idList);
+									 	var totalUSD = Math.floor(total/555);
+									 	 paypal.Buttons({
+										    createOrder: function(data, actions) {
+										      // This function sets up the details of the transaction, including the amount and line item details.
+										      return actions.order.create({
+										        purchase_units: [{
+										          amount: {
+										            value: totalUSD.toString()
+										          }
+										        }]
+										      },
+										      );
+										    },
+										    onApprove: function(data, actions) {
+										          // This function captures the funds from the transaction.
+										          return actions.order.capture().then(function(details) {
+										            	// This function shows a transaction success message to your buyer.
+										            	window.location.replace("http://localhost:8082/success?details="
+										            			+details.payer.name.given_name+"&details="+
+										            			details.payer.name.surname+"&details="+
+										            			details.payer.email_address+"&details="+
+										            			details.purchase_units[0].shipping.address.address_line_1+"&details="+
+										            			details.purchase_units[0].shipping.address.address_line_2+"&details="+
+										            			details.purchase_units[0].shipping.address.country_code+"&details="+
+										            			details.purchase_units[0].payments.captures[0].amount.value+"&details="+
+										            			details.purchase_units[0].payments.captures[0].amount.currency_code+"&idList="+idList
+										            	);
+										            			
+										            	
+										          });
+										     }
+										  }).render('#paypal-button-container');
+									 </script>
+									
+								 </div>
+							</div>
+						</div>				
+					</div> 
+				</div>				
+			</div>
+		</div>
+				
+    </div>
+    
+</div>
+<br><br><br>
+<!-- <input type="button" class="item_add items" value="Acheter maintenant"> -->
+<div th:replace="footer/footer :: footer"></div>
+<!---->
+<script type="text/javascript">
+ /*var simpleCart_quantity = document.getElementById("simpleCart_quantity");
+ console.log(simpleCart_quantity);
+ var valAct = parseInt(simpleCart_quantity.innerHTML);
+ console.log(valAct);
+ var remove = document.getElementByClassName("remove");
+
+ remove.onclick = function(){
+ 	simpleCart_quantity.value = valAct-1;
+ 	alert(simpleCart_quantity.value);
+ }*/
+ 
+</script>
+</body>
+</html>

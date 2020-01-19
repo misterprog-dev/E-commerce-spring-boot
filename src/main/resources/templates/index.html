@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html lang="end" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header/header :: header">
+	<meta charset="utf-8">
+</head>
+<body>
+<!-- header -->
+<div th:replace="header/header :: navbar"/></div>
+<br><br>
+<div class="top-sellers">
+    <div class="container">
+        <h3>TOP - VENTES</h3>
+   <!--      <div class="seller-grids">
+            <div class="col-md-3 seller-grid" data-th-each="subproduct3 : ${productnine}">
+                <a href="products.html">
+                    <img th:src="#{adminPath}+@{/product_images/}+'9.jpg'" class="img-responsive" alt=""/>
+                </a>
+                <h3><a href="products.html" th:text="${subproduct3.title}" ></a></h3>
+                <span th:text="${'VENDEUR: ' + subproduct3.publisher}"></span>
+                <p style="color: red;font-size: 20px;" th:text="'$' + ${subproduct3.listPrice}"></p>
+            </div>
+            <div class="col-md-3 seller-grid" data-th-each="subproduct1 : ${productfour}">
+                <a href="products.html">
+                    <img th:src="#{adminPath}+@{/product_images/}+'4.jpg'" class="img-responsive" alt=""/>
+                </a>
+                <h4><a href="products.html" th:text="${subproduct1.title}" ></a></h4>
+                <span th:text="${'VENDEUR: ' + subproduct1.publisher}"></span>
+                <p style="color: red" th:text="'$' + ${subproduct1.listPrice}"></p>
+            </div>
+            <div class="col-md-3 seller-grid" data-th-each="subproduct2 : ${producteleven}">
+                <a href="products.html">
+                    <img th:src="#{adminPath}+@{/product_images/}+'11.jpg'" class="img-responsive" alt=""/>
+                </a>
+                <h4><a href="products.html" th:text="${subproduct2.title}" ></a></h4>
+                <span th:text="${'VENDEUR: ' + subproduct2.publisher}"></span>
+                <p style="color: red" th:text="'$' + ${subproduct2.listPrice}"></p>
+            </div>
+            <div class="col-md-3 seller-grid" data-th-each="subproduct4 : ${productwelve}">
+                <a href="products.html">
+                    <img th:src="#{adminPath}+@{/product_images/}+'12.jpg'" class="img-responsive" alt=""/>
+                </a>
+                <h4><a href="products.html" th:text="${subproduct4.title}" ></a></h4>
+                <span th:text="${'VENDEUR: ' + subproduct4.publisher}"></span>
+                <p style="color: red" th:text="'$' + ${subproduct4.listPrice}"></p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+     --></div>
+</div>
+<!---->
+<div class="recommendation">
+    <div class="container">
+        <div class="recmnd-head">
+            <h3>RECOMMENDER POUR VOUS</h3>
+        </div>
+        <div class="bikes-grids">
+            <ul id="flexiselDemo1">
+                <li data-th-each="allproducts : ${productList}" >
+                    <a th:href="@{/buy?id=}+${allproducts.id}">
+                        <img
+                             th:src="@{${'/images/' + allproducts.product_image }}" class="img-responsive"
+                             alt=""/>
+                    </a>
+                    <h3><a href="products.html" th:text="${allproducts.title}"></a></h3>
+                    <p style="color: red; font-size: 20px;" th:text=" ${allproducts.listPrice} + ' XOF'"></p>
+                </li>
+            </ul>
+            <script type="text/javascript">
+                $(window).load(function () {
+                    $("#flexiselDemo1").flexisel({
+                        visibleItems: 5,
+                        animationSpeed: 1000,
+                        autoPlay: true,
+                        autoPlaySpeed: 3000,
+                        pauseOnHover: true,
+                        enableResponsiveBreakpoints: true,
+                        responsiveBreakpoints: {
+                            portrait: {
+                                changePoint: 480,
+                                visibleItems: 1
+                            },
+                            landscape: {
+                                changePoint: 640,
+                                visibleItems: 2
+                            },
+                            tablet: {
+                                changePoint: 768,
+                                visibleItems: 3
+                            }
+                        }
+                    });
+                });
+            </script>
+            <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+        </div>
+    </div>
+</div>
+<!---->
+<div th:replace="footer/footer :: footer"/></div>
+<!---->
+</body>
+</html>

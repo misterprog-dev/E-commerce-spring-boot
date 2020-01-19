@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="end" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header/header :: header">
+	<meta charset="utf-8">
+</head>
+<body>
+<!-- header -->
+<div th:replace="header/header :: navbar"></div>
+
+
+<div class="container">
+	<br><br>
+	<div class="jumbotron">
+		<h2 class="display-4">
+			Enregistrement des données du client
+		</h2>
+		
+		<form th:action="@{/saveCustomerInfo}" method="post">
+											        	
+       		<input type="text" class="form-control"
+                  style="width: 100% !important;margin-bottom: 10px;" name="firstname" placeholder="Entrer votre nom">
+       
+       		<input type="text" class="form-control"
+                         style="width: 100% !important;margin-bottom: 10px;" name="lastname" placeholder="Entrer votre prénom">
+                                      
+       		<input type="email" class="form-control"
+                    style="width: 100% !important;margin-bottom: 10px;" name="email" placeholder="Entrer votre email" required>
+                                       
+       		<input type="text" class="form-control"
+                   style="width: 100% !important;margin-bottom: 10px;" name="contact" placeholder="Entrer votre contact">
+                                      
+       		<input type="text" class="form-control"
+                   style="width: 100% !important;margin-bottom: 10px;" name="adresse" placeholder="Entrer votre adresse">
+                                       
+       	    <input type="submit" class="btn btn-primary" value="Enregistrer">
+       	</form>
+	</div>
+</div>
+	
+
+
+<div th:replace="footer/footer :: footer"></div>
+<!---->
+</body>
+</html>

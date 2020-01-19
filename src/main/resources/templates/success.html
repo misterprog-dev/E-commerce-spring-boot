@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="end" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header/header :: header">
+	<meta charset="utf-8">
+</head>
+<body>
+<!-- header -->
+<div th:replace="header/header :: navbar"></div>
+
+
+<div class="container">
+	<br><br>
+	<div class="jumbotron">
+		<h2 class="display-4">
+		Votre paiement a été effectué avec succès, vous allez recevoir un email pour un détail de votre 
+		transaction !<br><br>
+		<hr class="my-4">
+		Les détails de votre transaction sont les suivantes : <br><br>
+
+		</h2>
+		
+		<div class="card" style="text-align: center;font-size: 22px;" >
+		  <ul class="list-group list-group-flush" >
+		    <li class="list-group-item"><span th:text="${nom}"></span></li>
+		    <li class="list-group-item"><span th:text="${prenom}"></span></li>
+		    <li class="list-group-item"><span th:text="${email}"></span></li>
+		    <li class="list-group-item"><span th:text="${adresse}"></span></li>
+		    <li class="list-group-item">Pays : <span th:text="${pays}"></span></li>
+		    <li class="list-group-item"><b>Valeur du panier : <span th:text="${total}"></span> <span th:text="${monnaie}"></span></b></li>
+		  </ul>
+		</div>
+		
+	</div>
+</div>
+	
+
+
+<div th:replace="footer/footer :: footer"></div>
+<!---->
+</body>
+</html>
